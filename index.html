@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SSN-Portal</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Segoe UI",sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+        radial-gradient(circle at bottom right,#bfdbfe 0%,transparent 30%),
+        linear-gradient(135deg,#f8fbff,#eef5ff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:30px;
+      color:#1e293b;
+      position:relative;
+    }
+
+    /* ANIMIERTE BACKGROUND BLOBS */
+
+    .blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:.45;
+      animation:float 10s infinite ease-in-out;
+    }
+
+    .blob1{
+      width:320px;
+      height:320px;
+      background:#60a5fa;
+      top:-80px;
+      left:-80px;
+    }
+
+    .blob2{
+      width:400px;
+      height:400px;
+      background:#93c5fd;
+      bottom:-120px;
+      right:-100px;
+      animation-delay:2s;
+    }
+
+    .blob3{
+      width:220px;
+      height:220px;
+      background:#bfdbfe;
+      top:50%;
+      left:50%;
+      animation-delay:4s;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px) translateX(0px);
+      }
+      50%{
+        transform:translateY(25px) translateX(15px);
+      }
+    }
+
+    /* GLASS CONTAINER */
+
+    .container{
+      position:relative;
+      z-index:10;
+      width:100%;
+      max-width:1100px;
+      background:rgba(255,255,255,.72);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.6);
+      border-radius:34px;
+      padding:55px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.8);
+      animation:fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(40px) scale(.98);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    /* HEADER */
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:30px;
+      margin-bottom:55px;
+      flex-wrap:wrap;
+    }
+
+    .welcome{
+      font-size:15px;
+      font-weight:700;
+      text-transform:uppercase;
+      color:#3b82f6;
+      letter-spacing:1.5px;
+      margin-bottom:15px;
+      opacity:0;
+      animation:slideUp .8s ease forwards;
+    }
+
+    .headline{
+      font-size:54px;
+      line-height:1.05;
+      font-weight:800;
+      margin-bottom:18px;
+      max-width:650px;
+      opacity:0;
+      animation:slideUp .8s ease forwards;
+      animation-delay:.25s;
+    }
+
+    .subline{
+      font-size:18px;
+      line-height:1.7;
+      color:#64748b;
+      max-width:650px;
+      opacity:0;
+      animation:slideUp .8s ease forwards;
+      animation-delay:.5s;
+    }
+
+    @keyframes slideUp{
+      from{
+        opacity:0;
+        transform:translateY(25px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* LOGO */
+
+    .logo-box{
+      min-width:160px;
+      height:160px;
+      border-radius:28px;
+      border:2px dashed #cbd5e1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#94a3b8;
+      font-weight:700;
+      font-size:18px;
+      background:rgba(255,255,255,.45);
+      animation:pulse 5s infinite ease-in-out;
+      box-shadow:0 10px 25px rgba(0,0,0,.05);
+    }
+
+    @keyframes pulse{
+      0%,100%{
+        transform:scale(1);
+      }
+      50%{
+        transform:scale(1.05);
+      }
+    }
+
+    /* GRID */
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+      gap:28px;
+    }
+
+    /* CARDS */
+
+    .card{
+      position:relative;
+      overflow:hidden;
+      background:rgba(255,255,255,.82);
+      border-radius:28px;
+      padding:34px;
+      border:1px solid rgba(226,232,240,.9);
+      transition:.35s ease;
+      opacity:0;
+      transform:translateY(20px);
+      animation:cardShow .9s forwards ease;
+    }
+
+    .card:nth-child(1){
+      animation-delay:.8s;
+    }
+
+    .card:nth-child(2){
+      animation-delay:1s;
+    }
+
+    @keyframes cardShow{
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      background:rgba(59,130,246,.07);
+      border-radius:50%;
+      top:-70px;
+      right:-70px;
+      transition:.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px) scale(1.01);
+      box-shadow:0 18px 35px rgba(0,0,0,.08);
+    }
+
+    .card:hover::before{
+      transform:scale(1.2);
+    }
+
+    .card-title{
+      font-size:26px;
+      font-weight:800;
+      margin-bottom:12px;
+      position:relative;
+      z-index:2;
+    }
+
+    .card-text{
+      color:#64748b;
+      line-height:1.6;
+      margin-bottom:28px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* BUTTON GROUPS */
+
+    .button-group{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      position:relative;
+      z-index:2;
+    }
+
+    .action-btn{
+      width:100%;
+      border:none;
+      padding:16px 18px;
+      border-radius:16px;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:700;
+      color:white;
+      background:linear-gradient(135deg,#2563eb,#3b82f6);
+      transition:.25s ease;
+      box-shadow:0 10px 20px rgba(37,99,235,.18);
+    }
+
+    .action-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 16px 28px rgba(37,99,235,.25);
+    }
+
+    /* SELECT */
+
+    select{
+      width:100%;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid #dbe3ef;
+      background:#f8fafc;
+      margin-bottom:18px;
+      font-size:15px;
+      outline:none;
+      transition:.25s;
+    }
+
+    select:focus{
+      border-color:#3b82f6;
+      box-shadow:0 0 0 5px rgba(59,130,246,.10);
+      background:white;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      margin-top:40px;
+      text-align:center;
+      color:#94a3b8;
+      font-size:14px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      body{
+        overflow:auto;
+      }
+
+      .container{
+        padding:35px 28px;
+      }
+
+      .headline{
+        font-size:38px;
+      }
+
+      .header{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .logo-box{
+        width:120px;
+        height:120px;
+      }
+
+      .logo-img{
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+
+      <div>
+
+        <div class="welcome" id="welcomeText">
+          Willkommen
+        </div>
+
+        <div class="headline">
+          SSN Intranet<br>
+        </div>
+
+        <div class="subline">
+          Bitte wähle deine Anwendung.
+        </div>
+
+      </div>
+
+      <!-- LOGO -->
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="grid">
+
+      <!-- SERVER CARD -->
+      <div class="card">
+
+        <div class="card-title">
+          Server & Drive
+        </div>
+
+        <div class="card-text">
+          Direkter Schnellzugriff ohne Dropdown-Auswahl.
+        </div>
+
+        <div class="button-group">
+
+          <button class="action-btn"
+            onclick="window.open('https://server1.example.com','_blank')">
+            Server 1 öffnen
+          </button>
+
+          <button class="action-btn"
+            onclick="window.open('https://server2.example.com','_blank')">
+            Server 2 öffnen
+          </button>
+
+          <button class="action-btn"
+            onclick="window.open('https://drive.example.com','_blank')">
+            Direktlink Drive
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- EXTERN CARD -->
+      <div class="card">
+
+        <div class="card-title">
+          Externe Seiten
+        </div>
+
+        <div class="card-text">
+          Zugriff auf externe Plattformen über eine zentrale Oberfläche.
+        </div>
+
+        <select id="siteSelect">
+          <option value="">Bitte auswählen</option>
+          <option value="https://seite1.de">Seite 1</option>
+          <option value="https://seite2.de">Seite 2</option>
+          <option value="https://seite3.de">Seite 3</option>
+        </select>
+
+        <button class="action-btn" onclick="openSite()">
+          Seite öffnen
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      © 2026 NHB
+    </div>
+
+  </div>
+
+  <script>
+
+    // Dynamische Begrüßung
+    const hour = new Date().getHours();
+    const welcomeText = document.getElementById("welcomeText");
+
+    if(hour >= 5 && hour < 12){
+      welcomeText.innerText = "Guten Morgen";
+    }
+    else if(hour >= 12 && hour < 18){
+      welcomeText.innerText = "Guten Tag";
+    }
+    else{
+      welcomeText.innerText = "Guten Abend";
+    }
+
+    // Seite öffnen
+    function openSite(){
+
+      const url = document.getElementById("siteSelect").value;
+
+      if(url){
+        window.open(url, "_blank");
+      }
+      else{
+        alert("Bitte eine Seite auswählen.");
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
