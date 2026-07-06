@@ -400,22 +400,30 @@
         <div class="card-text">
           Schnellzugriff auf die wichtigsten Anwendungen
         </div>
+        <div class="card-text">
+          Eine Anmeldung wird gefordert. Für RobuCheck steht ein Terminal-Account zur Verfügung, die Zugangsdaten können bei den Materialwarten erfragt werden.
+        </div>
 
         <div class="button-group">
 
           <button class="action-btn"
-            onclick="window.open('https://server1.example.com','_blank')">
-            Server 1 öffnen
+            onclick="window.open('https://www.appsheet.com/start/5422f7a8-0b95-42c2-b1a4-86cb4a4ced8b?platform=desktop','_blank')">
+            RobuCheck öffnen
           </button>
 
           <button class="action-btn"
-            onclick="window.open('https://server2.example.com','_blank')">
-            Server 2 öffnen
+            onclick="window.open('https://www.appsheet.com/start/681a5f54-30ea-4335-b7af-ee1978fe605b?platform=desktop#appName=Lagereing%C3%A4ngenachChargenApp-705424913&vss=H4sIAAAAAAAAA6WOwQrCMBBE_2XO-YJcRVBEL4oX4yE2Wwm2SWlStYT8uxu1eFaP85Y3OwlXS7dt1NUF8pA-aUUjJJLCbuxIQSrMvIu9bxSEwka3L7jwLXX6zCEjH8XkRwqQ6Ttd_vddwBpy0daW-tJVTO54e3wuFoPJQRZoh6hPDT0Hs5Mzs9pXQyCz5yk_TAhLN7932pm1N1xZ6yZQfgAXbaaaZQEAAA==&view=Homepage','_blank')">
+            ADLER Lagermanagement öffnen
           </button>
 
           <button class="action-btn"
-            onclick="window.open('https://drive.example.com','_blank')">
-            Direktlink Drive
+            onclick="window.open('https://wiki.drk-rottenburg.org','_blank')">
+            Wiki DRK Rottenburg
+          </button>
+
+          <button class="action-btn"
+            onclick="window.open('https://cloud.drk-rottenburg.org','_blank')">
+            Cloud DRK Rottenburg
           </button>
 
         </div>
@@ -426,18 +434,18 @@
       <div class="card">
 
         <div class="card-title">
-          Externe Seiten
+          Verzeichnis weiterer Seiten
         </div>
 
         <div class="card-text">
-          Zugriff auf externe Plattformen über eine zentrale Oberfläche.
+          Sonstige Seiten
         </div>
 
         <select id="siteSelect">
           <option value="">Bitte auswählen</option>
           <option value="https://janderblasius.github.io/robucheck-labelgenerator/">RobuCheck Label-Generator</option>
           <option value="https://cpr.ssn-becker.synology.me:6101">CPR-Bewertungstool</option>
-          <option value="https://seite3.de">Seite 3</option>
+          <option value="https://github.com/JanderBlasius/drk-rtbg-allfiles">Öffentliche Vorlagen Lager- und Bekleidung</option>
         </select>
 
         <button class="action-btn" onclick="openSite()">
